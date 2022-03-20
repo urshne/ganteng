@@ -19,24 +19,20 @@ class JemputController extends Controller
      */
     public function index()
     {
-      $items = Jemput::join('tb_member','jemput.id_member','=','tb_member.id')->select('jemput.*','tb_member.nama')->orderBy('tb_member.nama')->get();
-
-      $member = Member::orderBy('nama')->get();
-
-      return view('jemput.index')->with([
-          'items' => $items,
-          'member' => $member
-      ]);
+        $data = Jemput::join('tb_member','pengjemputan.id_member','=','tb_member.id')->select('pengjemputan.*','tb_member.nama','tb_member.alamat', 'tb_member.tlp')->get();
+        $member = Member::orderBy('nama')->get();
+        return view('jemput.index')->with([
+            'data' => $data,
+            'member' => $member
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function updateStatus(Request $r)
     {
-        //
+        Jemput::findOrFail($r->id)->update([
+            'status' => $r->status
+        ]);
+        return back();
     }
 
     /**
@@ -102,13 +98,5 @@ class JemputController extends Controller
     {
         $date = date('Y-m-d-');
         return Excel::download(new JemputExport, $date.'jemput.xlsx');
-    }
-    
-    public function updateStatus(Request $r)
-    {
-        Jemput::findOrFail($r->id)->update([
-            'status' => $r->status
-        ]);
-        return response()->json(array('success' => true));
     }
 }

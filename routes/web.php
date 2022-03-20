@@ -91,6 +91,7 @@ Route::middleware('guest')->group(function(){
 
 Route::get('jemput', [JemputController::class, 'index'])->name('jemput');
 Route::post('jemput', [JemputController::class, 'store']);
+Route::post('jemput/updateStatus', [JemputController::class, 'updateStatus']);
 Route::post('jemput/store', [JemputController::class, 'update'])->name('jemput.update');
 Route::post('jemput/destroy', [JemputController::class, 'destroy'])->name('jemput.destroy');
 Route::get('jemput/export', [JemputController::class, 'export']);

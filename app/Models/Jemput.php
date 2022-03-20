@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Jemput extends Model
 {
     use HasFactory;
-    protected $table = 'jemput';
+    protected $table = 'pengjemputan';
     protected $fillable = [
-        'id',
         'id_member',
         'petugas',
         'status',

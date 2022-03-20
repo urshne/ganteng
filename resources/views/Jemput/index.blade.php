@@ -20,37 +20,29 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($member as $item)
+                @php
+                    $no = 1;
+                @endphp
+                @foreach($data as $item)
                 <tr>
-                    <td>{{ $item->id }}</td>
+                    <td>{{ $no++ }}</td>
                     <td>{{ $item->nama }}</td>
                     <td>{{ $item->alamat }}</td>
                     <td>{{ $item->tlp }}</td>
                     {{-- <td></td> --}}
                     <td>{{ $item->petugas }}</td>
                     <td>
-                        <form action="jemput/update/{{ $item->id }}"
-                            method="POST" enctype="multipart/form-data" class="d-inline"
-                            id="select_status{{ $item->id }}">
-                        @csrf
-                        <div class="input-group input-group-outline ms-2">
-                            <select name="status" id="status{{ $item->id }}"
-                                class="form-control @error('type') is-invalid @enderror" onchange="form.submit()">
-                                <option selected
-                                    value="{{ old('status') ? old('status') : $item->status }}">
-                                    {{ $item->status }} (Saat ini)</option>
-                                <option value="tercatat"> Tercatat </option>
-                                <option value="penjemputan"> Penjemputan </option>
-                                <option value="selesai"> Selesai </option>
-                                <input type="hidden" name="id_member"
-                                    value="{{ old('id_member') ? old('id_member') : $item->id_member }}">
-                                <input type="hidden" name="petugas"
-                                    value="{{ old('petugas') ? old('petugas') : $item->petugas }}">
-                            </select>
-                            @error('status')
-                                <div class="text-muted">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <form action="/jemput/updateStatus" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{ $item->id }}" name="id">
+                            <div class="input-group input-group-outline ms-2">
+                                <select name="status"
+                                    class="form-control" onchange="form.submit()">
+                                    <option value="tercatat" {{ $item->status == "tercatat" ? 'selected' : '' }}>Tercatat</option>
+                                    <option value="penjemputan" {{ $item->status == "penjemputan" ? 'selected' : '' }}>Penjemputan</option>
+                                    <option value="selesai" {{ $item->status == "selesai" ? 'selected' : '' }}>Selesai</option>
+                                </select>
+                            </div>
                         </form>
                         {{-- <script>
                         $('#ubah_status{{ $item->id }}').change(function() {
@@ -72,7 +64,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                             </div>
                             <form action="{{ route('jemput.update') }}" method="POST">
                             @csrf
@@ -102,10 +94,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                             </form>
                         </div>
