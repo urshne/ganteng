@@ -40,7 +40,12 @@ class PaketController extends Controller
      */
     public function store(Request $r)
     {
-        Paket::create($r->all());
+        Paket::create([
+            'id_outlet' => auth()->user()->id_outlet,
+            'nama_paket' => $r->nama_paket,
+            'harga' => $r->harga,
+            'jenis' => $r->jenis,
+        ]);
         return back();
     }
 
@@ -96,5 +101,5 @@ class PaketController extends Controller
         $date = date('Y-m-d');
         return Excel::download(new PaketExport, 'paket.xlsx');
     }
-    
+
 }

@@ -8,7 +8,6 @@
         </div>
         <form action="{{ route('paket') }}" method="POST">
         @csrf
-        <input type="hidden" name="id_outlet" value="1">
         <div class="modal-body">
             <div class="form-group">
                 <label for="jenis" class="form-label">Jenis Paket</label>
