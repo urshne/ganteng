@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengjemputan;
 use Illuminate\Http\Request;
 use App\Models\Member;
+use App\Http\Controllers\JemputController;
 
 class PenjemputanController extends Controller
 {
@@ -19,4 +20,17 @@ class PenjemputanController extends Controller
           'member' => $member
       ]);
     }
+
+    public function destroy(Request $r)
+    {
+        Pengjemputan::findOrFail($r->id)->delete($r->all());
+        return back();
+    }
+
+    public function update(Request $r, Pengjemputan $pengjemputan)
+    {
+        Pengjemputan::findOrFail($r->id)->update($r->all());
+        return back();
+    }
+
 }

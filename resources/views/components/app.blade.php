@@ -44,5 +44,6 @@
     </div>
     {{-- <a href=".." class="btn btn-danger">Logout</a> --}}
     <x-script></x-script>
+    {{ $script }}
 </body>
 </html>

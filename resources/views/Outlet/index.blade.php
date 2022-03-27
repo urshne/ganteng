@@ -31,10 +31,10 @@
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit outlet</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('outlet.update') }}" method="POST">
+                        <form action="{{ route('outlet.update') }}" method="POST" autocomplete="off">
                         @csrf
                         <input type="hidden" value="{{ $item->id }}" name="id">
                         <div class="modal-body">
@@ -64,7 +64,7 @@
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit outlet</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="{{ route('outlet.destroy') }}" method="POST">

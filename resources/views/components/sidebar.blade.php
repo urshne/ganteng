@@ -65,22 +65,34 @@
               <p>Transaksi</p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="data_karyawan" class="nav-link">
               <i class="far fa-address-book nav-icon"></i>
               <p>Simulasi Data Karyawan</p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> --}}
+          {{-- <li class="nav-item">
             <a href="buku" class="nav-link">
               <i class="fas fa-book nav-icon"></i>
               <p>Form Buku</p>
             </a>
-          </li>
-          <li class="nav-item">
+          </li> --}}
+          {{-- <li class="nav-item">
             <a href="jemput" class="nav-link">
               <i class="fas fa-book nav-icon"></i>
               <p>Penjemputan</p>
+            </a>
+          </li> --}}
+          <li class="nav-item">
+            <a href="strans" class="nav-link">
+              <i class="fas fa-book nav-icon"></i>
+              <p>Simulasi Transaksi</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="databarang" class="nav-link">
+              <i class="far fa-address-book nav-icon"></i>
+              <p>Penggunaan Barang</p>
             </a>
           </li>
           <li class="nav-header">Logout</li>

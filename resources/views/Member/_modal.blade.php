@@ -8,7 +8,7 @@
              <span aria-hidden="true">&times;</span>
           </button>
           </div>
-          <form autocomplete="off" id="formCreateMember">
+          <form autocomplete="off" id="formCreateMember" method="POST" action="member">
              @csrf
              <div class="modal-body">
                 <div class="form-group">
@@ -36,7 +36,7 @@
                 </div>
              </div>
              <div class="modal-footer bg-whitesmoke br">
-                <button type="button" class="btn btn-primary" id="btnCreateMember">Create</button>
+                <button type="submit" class="btn btn-primary" id="btnCreateMember">Create</button>
                 <button type="button" class="btn btn-secondary btnResetForm" data-dismiss="modal">Close</button>
              </div>
           </form>
@@ -54,7 +54,7 @@
              <span aria-hidden="true">&times;</span>
           </button>
           </div>
-          <form autocomplete="off" id="formUpdateMember">
+          <form autocomplete="off" id="formUpdateMember" method="POST" action="{{ route('member.update') }}">
              @csrf
              <div class="modal-body">
                 <input type="hidden" name="id" id="id">
@@ -83,7 +83,7 @@
                 </div>
              </div>
              <div class="modal-footer bg-whitesmoke br">
-                <button type="button" class="btn btn-primary" id="btnUpdateMember">Save changes</button>
+                <button type="submit" class="btn btn-primary" id="btnUpdateMember">Save changes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
              </div>
           </form>
@@ -134,7 +134,7 @@
            <div class="form-group">
              <input type="file" name="file" required="required">
            </div>
- 
+
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

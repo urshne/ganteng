@@ -14,7 +14,10 @@ use App\Http\Controllers\PengjemputanController;
 use App\Http\Controllers\SimulasiController;
 use App\Http\Controllers\TryController;
 use App\Http\Controllers\JemputController;
+use App\Http\Controllers\PenggunaanBarangController;
+use App\Http\Controllers\StransController;
 use App\Imports\MemberImport;
+use App\Models\PenggunaanBarang;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Row;
 
@@ -35,66 +38,78 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::post('member/store', [MemberController::class, 'update'])->name('member.update');
     Route::post('member/destroy', [MemberController::class, 'destroy'])->name('member.destroy');
     Route::get('member/export', [MemberController::class, 'export']);
-    Route::post('member/import_excel', [MemberController::class, 'importExcel']); 
-    
-    
+    Route::post('member/import_excel', [MemberController::class, 'importExcel']);
+
+
     Route::get('outlet', [OutletController::class, 'index'])->name('outlet');
     Route::post('outlet', [OutletController::class, 'store']);
     Route::post('outlet/store', [OutletController::class, 'update'])->name('outlet.update');
     Route::post('outlet/destroy', [OutletController::class, 'destroy'])->name('outlet.destroy');
     Route::get('outlet/export', [OutletController::class, 'export']);
-    
-    
+
+
     Route::get('paket', [PaketController::class, 'index'])->name('paket');
     Route::post('paket', [PaketController::class, 'store']);
     Route::post('paket/store', [PaketController::class, 'update'])->name('paket.update');
     Route::post('paket/destroy', [PaketController::class, 'destroy'])->name('paket.destroy');
     Route::get('paket/export', [PaketController::class, 'export']);
-    
-    
+
+
     Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
     Route::view('transaction/new', 'pages.transaction.new.index');
     Route::view('transaction/manage', 'pages.transaction.manage.index');
-    
+
     Route::get('buku', [BukuController::class, 'index'])->name('buku');
     Route::post('buku', [BukuController::class, 'store']);
     Route::post('buku/store', [BukuController::class, 'update'])->name('buku.update');
     Route::post('buku/destroy', [BukuController::class, 'destroy'])->name('buku.destroy');
-    
+
     Route::get('inven', [InvenController::class, 'index'])->name('inven');
     Route::post('inven', [InvenController::class, 'store']);
     Route::post('inven/store', [InvenController::class, 'update'])->name('inven.update');
     Route::post('inven/destroy', [InvenController::class, 'destroy'])->name('inven.destroy');
-    
+
     Route::get('minyak', [MinyakController::class, 'index'])->name('minyak');
     Route::post('minyak', [MinyakController::class, 'store']);
     Route::post('minyak/store', [MinyakController::class, 'update'])->name('minyak.update');
     Route::post('minyak/destroy', [MinyakController::class, 'destroy'])->name('minyak.destroy');
-    
+
     Route::get('mantap', [MantapController::class, 'index'])->name('mantap');
     Route::post('mantap', [MantapController::class, 'store']);
     Route::post('mantap/store', [MantapController::class, 'update'])->name('mantap.update');
     Route::post('mantap/destroy', [MantapController::class, 'destroy'])->name('mantap.destroy');
-    
+
+    Route::get('jemput', [JemputController::class, 'index'])->name('jemput');
+    Route::post('jemput', [JemputController::class, 'store']);
+    Route::post('jemput/updateStatus', [JemputController::class, 'updateStatus']);
+    Route::post('jemput/store', [JemputController::class, 'update'])->name('jemput.update');
+    Route::post('jemput/destroy', [JemputController::class, 'destroy'])->name('jemput.destroy');
+    Route::get('jemput/export', [JemputController::class, 'export']);
+
+    Route::get('databarang',[PenggunaanBarangController::class, 'index']);
+
+
     Route::view('/', 'Home.index');
-    
+    Route::get('penggunaan_barang', [PenggunaanBarangController::class, 'index'])->name('penggunaan_barang');
+    Route::post('penggunaan_barang', [PenggunaanBarangController::class, 'store']);
+    Route::post('penggunaan_barang/updateStatus', [PenggunaanBarangController::class, 'updateStatus']);
+    Route::post('penggunaan_barang/store', [PenggunaanBarangController::class, 'update'])->name('penggunaan_barang.update');
+    Route::post('penggunaan_barang/destroy', [PenggunaanBarangController::class, 'destroy'])->name('penggunaan_barang.destroy');
+    Route::get('penggunaan_barang/export', [PenggunaanBarangController::class, 'export']);
+
     Route::post('logout',[LoginController::class,'logout']);
     Route::get('data_karyawan',[SimulasiController::class, 'index']);
     Route::get('data_karyawan',[TryController::class, 'index']);
+    Route::get('strans',[StransController::class, 'index']);
 });
 
 Route::middleware('guest')->group(function(){
     Route::get('login', [LoginController::class, 'index'])->name('login');
     Route::post('login', [LoginController::class,'authenticate']);
-    
+
 });
 
-Route::get('jemput', [JemputController::class, 'index'])->name('jemput');
-Route::post('jemput', [JemputController::class, 'store']);
-Route::post('jemput/updateStatus', [JemputController::class, 'updateStatus']);
-Route::post('jemput/store', [JemputController::class, 'update'])->name('jemput.update');
-Route::post('jemput/destroy', [JemputController::class, 'destroy'])->name('jemput.destroy');
-Route::get('jemput/export', [JemputController::class, 'export']);
+
 
 
 

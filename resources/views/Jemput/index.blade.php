@@ -50,14 +50,14 @@
                         });
                         </script> --}}
                 </td>
-                    </td>
-                    <td>
-                        <div class="d-flex">
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateModal{{ $item->id }}">Edit</button>
-                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{ $item->id }}">Hapus</button>
-                        </div>
-                    </td>
-                </tr>
+                </td>
+                <td>
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateModal{{ $item->id }}">Edit</button>
+                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{ $item->data }}">Hapus</button>
+                    </div>
+                </td>
+            </tr>
                 <!-- Modal -->
                 <div class="modal fade" id="updateModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -72,10 +72,10 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="id_member" class="form-control-label" >Pilih Member</label>
-                                    <select class="form-control" placeholder="Pilih Member" name="id_member" id="js-example-basic-single">
+                                    <select class="form-control" placeholder="Pilih Member" name="id_member" id="js-example-basic-single" readonly disabled>
                                         <option disable>Pilih Member</option>
                                     @foreach ($member as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->alamat }} -{{ $item->tlp }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->nama }} - {{ $item->alamat }} -{{ $item->tlp }}"</option>
                                     @endforeach
                                 </select>
                                 </div>
@@ -86,11 +86,10 @@
                                 <div class="form-group">
                                     <label for="status" class="form-control-label my-auto">Status</label>
                                     <div class="input-group input-group-outline ms-2">
-                                        <select name="status" id="status" class="custom-select">
-                                            <option selected>Pilih Status</option>
-                                            <option value="tercatat">Tercatat</option>
-                                            <option value="penjemputan">Penjemputan</option>
-                                            <option value="selesai">Selesai</option>
+                                        <select name="status" class="form-control" onchange="form.submit()" disabled>
+                                            <option value="tercatat" {{ $item->status == "tercatat" ? 'selected' : '' }}>Tercatat</option>
+                                            <option value="penjemputan" {{ $item->status == "penjemputan" ? 'selected' : '' }}>Penjemputan</option>
+                                            <option value="selesai" {{ $item->status == "selesai" ? 'selected' : '' }}>Selesai</option>
                                         </select>
                                     </div>
                                 </div>
@@ -102,37 +101,37 @@
                             </form>
                         </div>
                     </div>
+                </div>
                 <!-- Modal -->
-                <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="deleteModal{{ $item->data }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('jemput.destroy') }}" method="POST">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{ route('jemput.destroy') }}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{ $item->id }} - {{ $item->alamat}}" name="id">
                             <div class="modal-body">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $item->id }}">
-                                Apakah anda yakin ingin menghapus data <strong>{{ $item->id }}</strong> ?
+                                Yakin untuk menghapus data ?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-danger">Yakin!</button>
+                                <button type="submit" class="btn btn-danger">Save changes</button>
                             </div>
-                        </form>
+                            </form>
                         </div>
                     </div>
                 </div>
+
                 @endforeach
             </tbody>
         </table>
     </div>
 
 <script>
-    
+
 </script>
         @include('jemput._modal')
 </x-app>

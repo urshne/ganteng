@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class BukuController extends Controller
 {
     /**
+     * Menampilkan Halaman Buku dan Mengirimkan Data Buku
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -31,7 +32,7 @@ class BukuController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Fungsi create data buku
      *
      * @param  \App\Http\Requests\StoreBukuRequest  $request
      * @return \Illuminate\Http\Response

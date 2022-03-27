@@ -90,7 +90,7 @@ class JemputController extends Controller
      */
     public function destroy(Request $r)
     {
-        Member::findOrFail($r->id)->delete($r->all());
+        Jemput::findOrFail($r->id)->delete($r->all());
         return back();
     }
 
